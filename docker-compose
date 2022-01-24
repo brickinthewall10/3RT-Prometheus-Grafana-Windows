@@ -1,0 +1,85 @@
+version: "3.7"
+services:
+  prometheus:
+    image: prom/prometheus:latest
+    volumes:
+            - /prometheus-grafana/prometheus/prometheus.yml:/etc/prometheus/prometheus.yml
+    ports:
+      - 9090:9090
+  grafana:
+    image: grafana/grafana:latest
+    volumes:
+            - /prometheus-grafana/grafana/grafana.ini:/etc/grafana/grafana.ini
+            - /prometheus-grafana/grafana/datasource.yml:/etc/grafana/provisioning/datasources/datasource.yaml
+    ports:
+      - 3000:3000
+    links:
+            - prometheus
+
+
+
+
+
+
+version: "3.7"
+services:
+  prometheus:
+    image: prom/prometheus:latest
+    volumes:
+            - /test/prometheus-grafana/prometheus/prometheus.yml:/etc/prometheus/prometheus.yml
+    ports:
+      - 9090:9090
+  grafana:
+    image: grafana/grafana:latest
+    volumes:
+            - /test/prometheus-grafana/grafana/grafana.ini:/etc/grafana/grafana.ini
+            - /test/prometheus-grafana/grafana/datasource.yml:/etc/grafana/provisioning/datasources/datasource.yaml
+    ports:
+      - 3000:3000
+    links:
+            - prometheus
+  cadvisor:
+    image: google/cadvisor:latest
+    container_name: cadvisor
+    volumes:
+      - /:/rootfs:ro
+      - /var/run:/var/run:ro
+      - /sys:/sys:ro
+      - /var/lib/docker/:/var/lib/docker:ro
+      - /dev/disk:/dev/disk/:ro
+    ports:
+      - 8080:8080
+
+
+
+
+
+
+version: "3.7"
+services:
+  prometheus:
+    image: prom/prometheus:latest
+    volumes:
+            - /test/prometheus-grafana/prometheus/prometheus.yml
+    ports:
+      - 9090:9090
+  grafana:
+    image: grafana/grafana:latest
+    volumes:
+            - /test/prometheus-grafana/grafana/grafana.ini
+            - /test/prometheus-grafana/grafana/datasource.yml
+    ports:
+      - 3000:3000
+    links:
+            - prometheus
+  cadvisor:
+    image: google/cadvisor:latest
+    container_name: cadvisor
+    volumes:
+      - /:/rootfs:ro
+      - /var/run:/var/run:ro
+      - /sys:/sys:ro
+      - /var/lib/docker/:/var/lib/docker:ro
+      - /dev/disk:/dev/disk/:ro
+    ports:
+      - 8080:8080
