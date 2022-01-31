@@ -1,4 +1,4 @@
-version: '3'
+  version: "3"
 
 services:
   mon_prometheus:
@@ -8,7 +8,7 @@ services:
     volumes:
       - /etc/localtime:/etc/localtime:ro
       - /etc/timezone:/etc/timezone:ro
-      - ./prometheus/prometheus.yml:/etc/prometheus/prometheus.yml
+      - /home/threert/prometheus/prometheus.yml:/etc/prometheus/prometheus.yml
       - prometheus:/prometheus
     command:
       - '--config.file=/etc/prometheus/prometheus.yml'
@@ -60,7 +60,7 @@ services:
     volumes:
       - /etc/localtime:/etc/localtime:ro
       - /etc/timezone:/etc/timezone:ro
-      - ./grafana/grafana.ini:/etc/grafana/grafana.ini
+      - /home/threert/grafana/grafana.ini:/etc/grafana/grafana.ini
       - grafana:/var/lib/grafana
     ports:
       - 127.0.0.1:3000:3000
@@ -80,7 +80,7 @@ services:
       - 127.0.0.1:3100:3100
     command: -config.file=/etc/loki/local-config.yaml
     volumes:
-      - ./loki/config.yaml:/etc/loki/config.yaml
+      - /home/threert/loki/config.yaml:/etc/loki/config.yaml
       - loki:/data/loki
     networks:
       - monitoring
@@ -91,7 +91,7 @@ services:
     volumes:
       - /var/log:/var/log
       - /var/lib/docker/containers:/var/lib/docker/containers
-      - ./promtail:/etc/promtail-config/
+      - /home/threert/promtail:/etc/promtail-config/
     command: -config.file=/etc/promtail-config/promtail.yml
     networks:
       - monitoring

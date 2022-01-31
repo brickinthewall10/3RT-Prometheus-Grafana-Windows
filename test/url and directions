@@ -3,6 +3,10 @@ https://susi.dev/prometheus-grafana-loki-with-docker-compose/
 
 https://www.devopsschool.com/blog/how-to-install-windows-exporter-for-prometheus/
 
+for alerting
+http://nilhcem.com/FakeSMTP/
+https://dzone.com/articles/grafana-alerting-and-email-notifications
+
 
  Parts
 
@@ -12,9 +16,11 @@ https://www.devopsschool.com/blog/how-to-install-windows-exporter-for-prometheus
     cAdvisor - Statistics and measurements for containers
     Node Exporter - Host system monitoring
     Windows-exporter - Windows data montiroting
+    fakesmtp - for email alerting
 
 
 
 ./prometheus/prometheus.yml
 ./loki/config.yaml
 ./promtail/promtail.yml
+./grafana/grafana.ini
