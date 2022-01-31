@@ -1,0 +1,20 @@
+ 
+https://susi.dev/prometheus-grafana-loki-with-docker-compose/
+
+https://www.devopsschool.com/blog/how-to-install-windows-exporter-for-prometheus/
+
+
+ Parts
+
+    Grafana - Dashboards & Visualising Data
+    Prometheus - Time-Series Data Storing
+    Loki + Promtail - Like Prometheus but for logs ;)
+    cAdvisor - Statistics and measurements for containers
+    Node Exporter - Host system monitoring
+    Windows-exporter - Windows data montiroting
+
+
+
+./prometheus/prometheus.yml
+./loki/config.yaml
+./promtail/promtail.yml
