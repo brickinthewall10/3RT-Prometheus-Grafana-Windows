@@ -1,4 +1,4 @@
-  version: "3"
+version: "3"
 
 services:
   mon_prometheus:
@@ -8,8 +8,10 @@ services:
     volumes:
       - /etc/localtime:/etc/localtime:ro
       - /etc/timezone:/etc/timezone:ro
-      - /home/threert/prometheus/prometheus.yml:/etc/prometheus/prometheus.yml
+      - /home/collinp/prometheus/prometheus.yml:/etc/prometheus/prometheus.yml
       - prometheus:/prometheus
+    ports:
+      - 9090:9090
     command:
       - '--config.file=/etc/prometheus/prometheus.yml'
     depends_on:
@@ -60,13 +62,10 @@ services:
     volumes:
       - /etc/localtime:/etc/localtime:ro
       - /etc/timezone:/etc/timezone:ro
-      - /home/threert/grafana/grafana.ini:/etc/grafana/grafana.ini
+      - /home/collinp/grafana/grafana.ini:/etc/grafana/grafana.ini
       - grafana:/var/lib/grafana
     ports:
-      - 127.0.0.1:3000:3000
-    environment:
-      GF_SERVER_DOMAIN: 3rtnetworks.com
-      GF_SERVER_ROOT_URL: 3rtnetworks.com
+      - 3000:3000
     user: "1000"
     depends_on:
       - mon_prometheus
@@ -77,10 +76,10 @@ services:
     image: grafana/loki:latest
     container_name: mon_loki
     ports:
-      - 127.0.0.1:3100:3100
+      - 3100:3100
     command: -config.file=/etc/loki/local-config.yaml
     volumes:
-      - /home/threert/loki/config.yaml:/etc/loki/config.yaml
+      - /home/collinp/loki/config.yaml:/etc/loki/config.yaml
       - loki:/data/loki
     networks:
       - monitoring
@@ -91,7 +90,7 @@ services:
     volumes:
       - /var/log:/var/log
       - /var/lib/docker/containers:/var/lib/docker/containers
-      - /home/threert/promtail:/etc/promtail-config/
+      - /home/collinp/promtail.yml:/etc/promtail-config/
     command: -config.file=/etc/promtail-config/promtail.yml
     networks:
       - monitoring
